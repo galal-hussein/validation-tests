@@ -1518,7 +1518,9 @@ def test_ldap_create_new_env_with_readonly_member(admin_client):
 def test_enable_auth_and_write_keys(admin_client):
     global DISABLE_FIN
     DISABLE_FIN = True
-    key_file = open("key_file.txt","w")
-    key_file.write(ADMIN_LDAP_CLIENT._access_key + "\n")
-    key_file.write(ADMIN_LDAP_CLIENT._secret_key)
-    key_file.close()
+    access_key_file = open("access_key.txt","w")
+    access_key_file.write(ADMIN_LDAP_CLIENT._access_key)
+    access_key_file.close()
+    secret_key_file = open("secret_key.txt","w")
+    secret_key_file.write(ADMIN_LDAP_CLIENT._secret_key)
+    secret_key_file.close()

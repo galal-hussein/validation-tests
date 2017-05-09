@@ -11,7 +11,7 @@ if_do_key = pytest.mark.skipif(
     reason="Digital Ocean key is not set")
 
 ADMIN_LDAP_CLIENT = None
-
+DISABLE_FIN = False
 
 class LdapAuth(AuthBase):
     def __init__(self, jwt, prj_id=None):
@@ -150,9 +150,10 @@ def turn_on_off_ldap_auth(admin_client, request):
     admin_client.create_openldapconfig(config)
 
     def fin():
-        config = load_config()
-        config['enabled'] = None
-        client.create_ldapconfig(config)
+        if not DISABLE_FIN:
+            config = load_config()
+            config['enabled'] = None
+            client.create_ldapconfig(config)
     request.addfinalizer(fin)
 
 
@@ -1511,3 +1512,13 @@ def test_ldap_create_new_env_with_readonly_member(admin_client):
                                      stackId=env.id,
                                      removed_null=True)
     assert len(service) == 1
+
+
+# Must be the last test case
+def test_enable_auth_and_write_keys(admin_client):
+    global DISABLE_FIN
+    DISABLE_FIN = True
+    key_file = open("key_file.txt","w")
+    key_file.write(ADMIN_LDAP_CLIENT._access_key + "\n")
+    key_file.write(ADMIN_LDAP_CLIENT._secret_key)
+    key_file.close()

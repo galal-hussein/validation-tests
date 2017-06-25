@@ -80,7 +80,7 @@ def validate_stack(input_config):
     assert pod['status']['phase'] == "Running"
     container = pod['status']['containerStatuses'][0]
     assert "husseingalal/nginx-curl" in container['image']
-    assert container['restartCount'] == 0
+    #assert container['restartCount'] == 0
     assert container['ready']
     assert container['name'] == "nginx"
 

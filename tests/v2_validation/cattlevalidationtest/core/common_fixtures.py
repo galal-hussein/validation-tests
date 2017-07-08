@@ -2824,7 +2824,11 @@ def execute_helm_cmds(command, chdir=None, expected_resps=None):
 
     stdin, stdout, stderr = ssh.exec_command(cmd)
     response = stdout.readlines()
-    # error = stderr.readlines()
+    error = stderr.readlines()
+    str_error = ""
+    for err in error:
+        str_error += err
+    print "Error in response" + str(str_error)
 
     str_response = ""
     for resp in response:

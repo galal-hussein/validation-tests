@@ -149,23 +149,23 @@ def test_validate_helm(kube_hosts):
     assert validate_helm()
 
 
-@if_stress_testing
-def test_upgrade_validate_k8s(kube_hosts):
-    input_config = {
-        "namespace": "stresstest-ns-1",
-        "port_ext": "1"
-    }
-    for i in range(2, 10):
-        upgrade_k8s()
-        time.sleep(120)
-        validate_kubectl()
-        assert check_k8s_dashboard()
-        modify_stack(input_config)
-        # New stack
-        input_config = {
-            "namespace": "stresstest-ns-"+str(i),
-            "port_ext": str(i)
-        }
-        create_stack(input_config)
-        validate_stack(input_config)
-        assert validate_helm()
+# @if_stress_testing
+# def test_upgrade_validate_k8s(kube_hosts):
+#    input_config = {
+#        "namespace": "stresstest-ns-1",
+#        "port_ext": "1"
+#    }
+#    for i in range(2, 10):
+#        upgrade_k8s()
+#        time.sleep(120)
+#        validate_kubectl()
+#        assert check_k8s_dashboard()
+#        modify_stack(input_config)
+#        # New stack
+#        input_config = {
+#            "namespace": "stresstest-ns-"+str(i),
+#            "port_ext": str(i)
+#        }
+#        create_stack(input_config)
+#        validate_stack(input_config)
+#        assert validate_helm()

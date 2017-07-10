@@ -2785,7 +2785,13 @@ def execute_kubectl_cmds(command, expected_resps=None, file_name=None,
     str_response = ""
     for resp in response:
         str_response += resp
+
+    err_str = ""
+    for err in error:
+        err_str += err
+
     print "Obtained Response: " + str_response
+    print "Obtained Error: " + err_str
 
     # Validate Expected Response
     if expected_resps is not None:

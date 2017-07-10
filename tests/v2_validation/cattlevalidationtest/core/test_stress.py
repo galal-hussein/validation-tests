@@ -156,7 +156,7 @@ def test_upgrade_validate_k8s(kube_hosts):
        "port_ext": "1"
    }
    for i in range(2, 10):
-       # upgrade_k8s()
+       upgrade_k8s()
        validate_kubectl()
        assert check_k8s_dashboard()
        modify_stack(input_config)

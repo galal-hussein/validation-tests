@@ -3009,7 +3009,7 @@ def add_digital_ocean_hosts(client, count, size="2gb",
             active += 1
             hosts.append(host)
         except:
-            host = k8s_client.wait_success(k8s_client.delete(host))
+            host = client.wait_success(client.delete(host))
             assert host.state == 'removed'
     return hosts
 

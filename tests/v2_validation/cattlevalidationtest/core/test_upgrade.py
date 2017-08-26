@@ -96,7 +96,7 @@ def validate_stack(input_config):
     assert "sangeetha/testnewhostrouting" in container["image"]
     assert container["name"] == "nginx"
     waitfor_pods(
-        selector="type=rc", namespace=namespace, number=1)
+        selector="type=rc", namespace=namespace, number=2)
     get_response = execute_kubectl_cmds(
         "get pod --selector=type=rc"
         " -o json --namespace="+namespace)

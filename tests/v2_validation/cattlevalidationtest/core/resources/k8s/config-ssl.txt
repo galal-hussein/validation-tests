@@ -3,6 +3,7 @@ kind: Config
 clusters:
 - cluster:
     api-version: v1
+    insecure-skip-tls-verify: true
     server: "$server/r/projects/$pid/kubernetes"
   name: $environment
 contexts:
